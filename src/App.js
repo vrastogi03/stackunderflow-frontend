@@ -5,14 +5,21 @@ import SearchBox from './components/searchbox/searchbox';
 import Scroll from './components/Scroll/scroll';
 import QuesList from './components/quesList/quesList';
 import Navigation2 from './components/Navigation2/Navigation2'
+import SigninStudent from './components/Signin/SigninStudent';
+import SigninTeacher from './components/Signin/SigninTeacher';
+
+const initialState = {
+  questions: [],
+  searchfield: '',
+  isTeach: false,
+  route: 'signinstud',
+  isSignedIn: false
+}
 
 class App extends Component {
   constructor() {
       super()
-      this.state= {
-          questions: [],
-          searchfield: '' 
-      }
+      this.state= initialState
   }
 
    onButtonAll = () =>{
@@ -48,15 +55,35 @@ class App extends Component {
     })
   }
 
+  onRouteChange = (route) =>{
+    if ( route === 'signinstud') {
+      this.setState(initialState)
+
+    } else if ( route === 'homestud') {
+      this.setState({isSignedIn: true,isTeach: false})
+    }else if(route === 'hometeach')
+    {
+      this.setState({isSignedIn: true,isTeach: true})
+    }
+    this.setState({route: route})
+  }
+
   render(){
       return (
         <div>
-          <Navigation/>
+          <Navigation onRouteChange={this.onRouteChange} isSignedIn={this.state.isSignedIn}/>
+
+          {
+            this.state.route==="signinstud"?
+            <SigninStudent onRouteChange={this.onRouteChange}/>:
+            this.state.route==="signinteach"?
+          <SigninTeacher onRouteChange={this.onRouteChange}/>:
+          <div>
           <div className='tc'>
                     <h1 className='f1'>STACK UNDERFLOW</h1>
                     <SearchBox searchChange={this.onSearchChange} />
                     <Scroll>
-                      <QuesList questions={this.state.questions}/>
+                      <QuesList questions={this.state.questions} isTeach={this.state.isTeach} />
                     </Scroll>
           </div>
           <Navigation2
@@ -64,6 +91,8 @@ class App extends Component {
             onButtonAns={this.onButtonAns}
             onButtonUnAns={this.onButtonUnAns}
           />
+          </div>
+        }
         </div>
       )
   }

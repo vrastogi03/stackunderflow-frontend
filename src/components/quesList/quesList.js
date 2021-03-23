@@ -1,7 +1,7 @@
 import React from 'react';
 import Question from '../question/question';
 
-const QuesList = ({ questions }) => {
+const QuesList = ({ questions,isTeach }) => {
     console.log(questions)
     return(
         <div>
@@ -10,6 +10,7 @@ const QuesList = ({ questions }) => {
                     return(
                         <Question
                             key={i}
+                            isTeach={isTeach}
                             number={i+1}
                             question={questions[i].question}
                             answer={questions[i].answer}
