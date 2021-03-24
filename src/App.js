@@ -7,19 +7,45 @@ import QuesList from './components/quesList/quesList';
 import Navigation2 from './components/Navigation2/Navigation2'
 import SigninStudent from './components/Signin/SigninStudent';
 import SigninTeacher from './components/Signin/SigninTeacher';
+import RegisterStudent from './components/Register/registerStudent';
+import RegisterTeacher from './components/Register/registerTeacher';
+import Rank from './components/Rank/rank';
 
 const initialState = {
   questions: [],
   searchfield: '',
   isTeach: false,
   route: 'signinstud',
-  isSignedIn: false
+  isSignedIn: false,
+  user: {
+    id: '',
+    name:'',
+    email:'',
+    entries:0
+  }
 }
 
 class App extends Component {
   constructor() {
       super()
       this.state= initialState
+  }
+  loadstud=(data)=>{
+    this.setState({user: {
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      entries: data.quesasked
+    }})
+  }
+
+  loadteach=(data)=>{
+    this.setState({user: {
+      id: data.id,
+      name: data.name,
+      email: data.email,
+      entries: data.quesanswered
+    }})
   }
 
    onButtonAll = () =>{
@@ -54,6 +80,10 @@ class App extends Component {
      //  console.log(this.state.questions[0].question)
     })
   }
+  onSearchChange = (event) => {
+    this.setState({ searchfield: event.target.value })
+    
+}
 
   onRouteChange = (route) =>{
     if ( route === 'signinstud') {
@@ -69,21 +99,31 @@ class App extends Component {
   }
 
   render(){
+    const filteredQues = this.state.questions.filter( robot =>{
+      return robot.question.toLowerCase().includes(this.state.searchfield.toLowerCase());
+  })
       return (
         <div>
           <Navigation onRouteChange={this.onRouteChange} isSignedIn={this.state.isSignedIn}/>
-
+       
           {
             this.state.route==="signinstud"?
-            <SigninStudent onRouteChange={this.onRouteChange}/>:
+            <SigninStudent onRouteChange={this.onRouteChange} loadstud={this.loadstud}/>:
             this.state.route==="signinteach"?
-          <SigninTeacher onRouteChange={this.onRouteChange}/>:
+          <SigninTeacher onRouteChange={this.onRouteChange} loadteach={this.loadteach}/>:
+          this.state.route==="registerstud"?
+          <RegisterStudent onRouteChange={this.onRouteChange}/>:
+          this.state.route==="registerteach"?
+          <RegisterTeacher onRouteChange={this.onRouteChange}/>:
+
           <div>
           <div className='tc'>
                     <h1 className='f1'>STACK UNDERFLOW</h1>
+                    <Rank name={this.state.user.name} entries={this.state.user.entries} isTeach={this.state.isTeach} />
+
                     <SearchBox searchChange={this.onSearchChange} />
                     <Scroll>
-                      <QuesList questions={this.state.questions} isTeach={this.state.isTeach} />
+                      <QuesList questions={filteredQues} isTeach={this.state.isTeach} />
                     </Scroll>
           </div>
           <Navigation2
