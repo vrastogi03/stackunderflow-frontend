@@ -95,6 +95,7 @@ class App extends Component {
     {
       this.setState({isSignedIn: true,isTeach: true})
     }
+    
     this.setState({route: route})
   }
 
@@ -107,14 +108,14 @@ class App extends Component {
           <Navigation onRouteChange={this.onRouteChange} isSignedIn={this.state.isSignedIn}/>
        
           {
-            this.state.route==="signinstud"?
+            this.state.route==='signinstud'?
             <SigninStudent onRouteChange={this.onRouteChange} loadstud={this.loadstud}/>:
-            this.state.route==="signinteach"?
+            this.state.route==='signinteach'?
           <SigninTeacher onRouteChange={this.onRouteChange} loadteach={this.loadteach}/>:
-          this.state.route==="registerstud"?
-          <RegisterStudent onRouteChange={this.onRouteChange}/>:
-          this.state.route==="registerteach"?
-          <RegisterTeacher onRouteChange={this.onRouteChange}/>:
+          this.state.route==='registerstud'?
+          <RegisterStudent onRouteChange={this.onRouteChange} loadstud={this.loadstud}/>:
+          this.state.route==='registerteach'?
+          <RegisterTeacher onRouteChange={this.onRouteChange} loadteach={this.loadteach}/>:
 
           <div>
           <div className='tc'>

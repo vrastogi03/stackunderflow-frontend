@@ -31,9 +31,12 @@ class SigninStudent extends React.Component{
         .then(user => {
           if(user.id){ // does the user exist? Did we receive a user with a property of id?
             this.props.loadstud(user);
+            console.log('hello');
             this.props.onRouteChange('homestud');
           }
+
         })
+
     }
 
     render(){
@@ -41,7 +44,7 @@ class SigninStudent extends React.Component{
         return(
             <article className="br3 ba  b--black-10 mv4 w-100 w-50-m w-25-l shadow-5 mw6 center">
             <main className="pa4 black-80">
-                <form className="measure centre ">
+                <div className="measure centre ">
                     <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                     <legend className="f4 fw6 ph0 mh0">Sign In Student</legend>
                     <div className="mt3">
@@ -71,9 +74,9 @@ class SigninStudent extends React.Component{
                         value="Sign in"/>
                     </div>
                     <div className="lh-copy mt3">
-                    <a href="#0" className="f6 link dim black db" onClick={ () => onRouteChange('registerstud')}>Register Student</a>
+                    <p className="f6 link dim black db" onClick={ () => onRouteChange('registerstud')}>Register Student</p>
                     </div>
-                </form>
+                </div>
             </main>
             </article>
         )

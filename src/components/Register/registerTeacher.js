@@ -35,10 +35,11 @@ class RegisterTeacher extends React.Component{
             .then(response => response.json())
             .then(user =>{
                 if(user.id){
-                    this.props.loadstud(user)
-                    this.props.onRouteChange('hometeach')
+                    this.props.loadteach(user);
+                    this.props.onRouteChange('hometeach');
                 }
             })
+
     }
     
     render(){
@@ -46,7 +47,7 @@ class RegisterTeacher extends React.Component{
         return(
             <article className="br3 ba  b--black-10 mv4 w-100 w-50-m w-25-l shadow-5 mw6 center">
             <main className="pa4 black-80">
-                <form className="measure centre ">
+                <div className="measure centre ">
                     <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                     <legend className="f4 fw6 ph0 mh0">Register Teacher</legend>
                     <div className="mt3">
@@ -84,7 +85,7 @@ class RegisterTeacher extends React.Component{
                         onClick={this.onSubmitSignIn} 
                         value="Register"/>
                     </div>
-                </form>
+                </div>
             </main>
             </article>
         )
