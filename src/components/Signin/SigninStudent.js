@@ -31,7 +31,7 @@ class SigninStudent extends React.Component{
         .then(user => {
           if(user.id){ // does the user exist? Did we receive a user with a property of id?
             this.props.loadstud(user);
-            console.log('hello');
+            // console.log('hello');
             this.props.onRouteChange('homestud');
           }
 

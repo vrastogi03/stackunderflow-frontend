@@ -1,7 +1,7 @@
 import React from 'react';
 import Question from '../question/question';
 
-const QuesList = ({ questions,isTeach }) => {
+const QuesList = ({loadQues, questions,isTeach,onRouteChange }) => {
     console.log(questions)
     return(
         <div>
@@ -10,12 +10,11 @@ const QuesList = ({ questions,isTeach }) => {
                     return(
                         <Question
                             key={i}
+                            onRouteChange={onRouteChange}
                             isTeach={isTeach}
                             number={i+1}
-                            question={questions[i].question}
-                            answer={questions[i].answer}
-                            askedby={questions[i].askedbyname}
-                            answeredby={questions[i].answeredbyname}
+                            loadQues={loadQues}
+                            ques={questions[i]}
                       />
                     )
                 })

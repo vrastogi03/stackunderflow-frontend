@@ -29,7 +29,7 @@ class SigninTeacher extends React.Component  {
         .then(user => {
           if(user.id){ // does the user exist? Did we receive a user with a property of id?
             this.props.loadteach(user);
-            console.log('hi')
+            // console.log('hi')
             this.props.onRouteChange('hometeach');
 
           }
