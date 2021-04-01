@@ -1,14 +1,11 @@
 import React from 'react';
 
-const Rank = ({ name, entries,isTeach }) => {
-    if(isTeach){
+const Rank = ({ user,isTeach }) => {
+    if(isTeach===false){
         return (
         <div>
             <div className='white f3'>
-            {`${name}, Number of questions you have answered is-`}
-            </div>
-            <div className='white f1'>
-            {entries}
+            {`${user.name},Welcome Student`}
             </div>
         </div>
         );
@@ -17,11 +14,8 @@ const Rank = ({ name, entries,isTeach }) => {
         return (
             <div>
                 <div className='white f3'>
-                {`${name}, Number of questions you have asked is-`}
-                </div>
-                <div className='white f1'>
-                {entries}
-                </div>
+                {`${user.name}, Welcome Teacher`}
+                </div>    
             </div>
             );
     }

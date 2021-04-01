@@ -12,26 +12,9 @@ class AskQues extends React.Component{
     onQuesChange = (event) =>{
         this.setState({ques: event.target.value})
     }
-    onSubmit = () => {
-        fetch('https://blueberry-pie-74380.herokuapp.com/askques',{
-            method: 'post',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                askedby: this.props.id,
-                question: this.state.ques
-            })
-        })
-            .then(response => response.json())
-            .then(user =>{
-                if(user.id){
-                    this.props.updateCountStud()
-                    this.props.onRouteChange('homestud');
-                }
-            })
-
-    }
+    
     render(){
-        const {onRouteChange}=this.props;
+        const {onRouteChange,onSubmitAskQues}=this.props;
         return(
             <div className="pa4 black-80">
                 <div>
@@ -49,7 +32,7 @@ class AskQues extends React.Component{
                         onChange={this.onQuesChange}>
                     </textarea>
                     <ButtonGroup style= {{display: 'flex'}}>
-                        <Button color="primary" onClick={this.onSubmit}>Submit</Button>
+                        <Button color="primary" onClick={()=> onSubmitAskQues(this.state.ques)}>Submit</Button>
                         <Button color="primary"  onClick={ () => onRouteChange('homestud')} >Go Back</Button>
                     </ButtonGroup>
                 </div>

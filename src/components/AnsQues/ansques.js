@@ -12,30 +12,9 @@ class AnsQues extends React.Component{
     onAnsChange = (event) =>{
         this.setState({ans: event.target.value})
     }
-    onSubmit = () => {
-        fetch('https://blueberry-pie-74380.herokuapp.com/ansques',{
-            method: 'put',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-               id:this.props.currques.id,
-               answeredby:this.props.user.id,
-               answer:this.state.ans
-            })
-        })
-            .then(response => response.json())
-            .then(user =>{
-                if(user.id){
-                    this.props.updateCountTeach()
-                    this.props.onRouteChange('hometeach');
-                    
-                }
-            })
-
-    }
-
 
     render(){
-        const {onRouteChange,currques} = this.props;
+        const {onRouteChange,currques,onSubmitAnsQues} = this.props;
         return(
             <div className="pa4 black-80">
                 <div>
@@ -59,7 +38,7 @@ class AnsQues extends React.Component{
                         aria-describedby="comment-desc">
                     </textarea>
                     <ButtonGroup style= {{display: 'flex'}}>
-                        <Button color="primary" onClick={this.onSubmit}>Submit</Button>
+                        <Button color="primary" onClick={()=> onSubmitAnsQues(this.state.ans)}>Submit</Button>
                         <Button color="primary"  onClick={ () => onRouteChange('hometeach')} >Go Back</Button>
                     </ButtonGroup>
                 </div>

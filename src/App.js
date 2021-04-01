@@ -131,6 +131,56 @@ updateCountStud=()=>{
     this.setState({route: route})
   }
 
+  deleteQues=(ques)=>{
+    fetch('https://blueberry-pie-74380.herokuapp.com/delete',{
+      method: 'delete',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+         id:ques.id,
+      })
+  }).then(this.onButtonAll)
+  }
+
+  onSubmitAskQues = (ques) => {
+    fetch('https://blueberry-pie-74380.herokuapp.com/askques',{
+        method: 'post',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            askedby: this.state.user.id,
+            question: ques
+        })
+    })
+        .then(response => response.json())
+        .then(user =>{
+            if(user.id){
+                // console.log(this.props.user.name)
+                // this.props.loadUser(this.props.user)
+                this.onRouteChange('homestud');
+            }
+        })
+}
+
+onSubmitAnsQues = (ans) => {
+  fetch('https://blueberry-pie-74380.herokuapp.com/ansques',{
+      method: 'put',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+         id:this.state.currques.id,
+         answeredby:this.state.user.id,
+         answer:ans
+      })
+  })
+      .then(response => response.json())
+      .then(user =>{
+          if(user.id){
+              this.onRouteChange('hometeach');
+              
+          }
+      })
+
+}
+
+
   render(){
     const filteredQues = this.state.questions.filter( robot =>{
       return robot.question.toLowerCase().includes(this.state.searchfield.toLowerCase());
@@ -148,20 +198,34 @@ updateCountStud=()=>{
           this.state.route==='registerteach'?
           <RegisterTeacher onRouteChange={this.onRouteChange} loadteach={this.loadteach}/>:
             this.state.route==='askques'?
-            <AskQues updateCountStud={this.updateCountStud} onRouteChange={this.onRouteChange} id={this.state.user.id} />:
+            <AskQues 
+              updateCountStud={this.updateCountStud} 
+              onRouteChange={this.onRouteChange} 
+              onSubmitAskQues={this.onSubmitAskQues}
+              id={this.state.user.id} 
+              user={this.state.user} 
+              />:
             this.state.route==='ansques'?
-            <AnsQues updateCountTeach={this.updateCountTeach} onRouteChange={this.onRouteChange} currques={this.state.currques} user={this.state.user}/>:
+            <AnsQues 
+              updateCountTeach={this.updateCountTeach} 
+              onRouteChange={this.onRouteChange} 
+              currques={this.state.currques} 
+              user={this.state.user} 
+              onSubmitAnsQues={this.onSubmitAnsQues}
+              />:
           <div>
           <div className='tc'>
                     <h1 className='f1'>STACK UNDERFLOW</h1>
-                    <Rank name={this.state.user.name} entries={this.state.user.entries} isTeach={this.state.isTeach} />
+                    <Rank user={this.state.user} isTeach={this.state.isTeach} />
 
                     <SearchBox searchChange={this.onSearchChange} />
                     <Scroll>
                       <QuesList 
                         questions={filteredQues} 
                         isTeach={this.state.isTeach} 
+                        user={this.state.user}
                         loadQues={this.loadQues}
+                        deleteQues={this.deleteQues}
                         onRouteChange={this.onRouteChange} />
                     </Scroll>
           </div>
