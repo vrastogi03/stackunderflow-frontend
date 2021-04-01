@@ -46,7 +46,7 @@ class SigninStudent extends React.Component{
             <main className="pa4 black-80">
                 <div className="measure centre ">
                     <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-                    <legend className="f4 fw6 ph0 mh0">Sign In Student</legend>
+                    <legend className="f4 fw6 ph0 mh0">Sign  In Student</legend>
                     <div className="mt3">
                         <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
                         <input 
