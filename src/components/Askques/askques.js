@@ -13,7 +13,7 @@ class AskQues extends React.Component{
         this.setState({ques: event.target.value})
     }
     onSubmit = () => {
-        fetch('http://localhost:3000/askques',{
+        fetch('https://blueberry-pie-74380.herokuapp.com/askques',{
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({

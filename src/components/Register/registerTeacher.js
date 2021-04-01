@@ -23,7 +23,7 @@ class RegisterTeacher extends React.Component{
     }
 
     onSubmitSignIn = () => {
-        fetch('http://localhost:3000/registerteacher',{
+        fetch('https://blueberry-pie-74380.herokuapp.com/registerteacher',{
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({

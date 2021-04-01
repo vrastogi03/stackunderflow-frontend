@@ -63,7 +63,7 @@ class App extends Component {
   }
 
    onButtonAll = () =>{
-     fetch('http://localhost:3000/getques',{
+     fetch('https://blueberry-pie-74380.herokuapp.com/getques',{
        method: 'get',
        headers: {'Content-Type':'application/json'}
      }).then(response=>response.json())
@@ -74,7 +74,7 @@ class App extends Component {
    }
 
    onButtonAns = () =>{
-    fetch('http://localhost:3000/getansques',{
+    fetch('https://blueberry-pie-74380.herokuapp.com/getansques',{
       method: 'get',
       headers: {'Content-Type':'application/json'}
     }).then(response=>response.json())
@@ -85,7 +85,7 @@ class App extends Component {
   }
 
   onButtonUnAns = () =>{
-    fetch('http://localhost:3000/getunansques',{
+    fetch('https://blueberry-pie-74380.herokuapp.com/getunansques',{
       method: 'get',
       headers: {'Content-Type':'application/json'}
     }).then(response=>response.json())
